@@ -1,35 +1,32 @@
 import * as React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './scss/app';
 
-export default class App extends React.Component<IAppProps, IAppState> {
+import Navbar from './components/Navbar';
+import AllBlogs from './components/AllBlogs';
+import OneBlog from './components/OneBlog';
+import Admin from './components/Admin';
+import AddBlog from './components/AddBlog';
 
-    constructor(props: IAppProps) {
-        super(props);
+export interface AppProps {
 
-        this.state = { name: null };
-    }
+}
 
-    async componentWillMount() {
-        let r = await fetch('/api/hello');
-        let name = await r.json();
-        this.setState({ name })
-    }
-
-    render () {
-        return (
+const App: React.SFC<AppProps> = () => {
+    return (
+        <Router>
             <main className="container">
-                <h1 className="covalence-blue">Hello {this.state.name}!</h1>
-                <h2></h2>
+                <Navbar />
+                <Switch>
+                    <Route path='/' component={AllBlogs} />
+                    <Route exact path='/blogs/:id' component={OneBlog} />
+                    <Route exact path='/:id/admin' component={Admin} />
+                    <Route exact path='/add' component={AddBlog} />
+                </Switch>
             </main>
-        )
-    }
+        </Router>
+    );
 }
 
-interface IAppProps {
-
-}
-
-interface IAppState {
-    name: string;
-}
+export default App;
