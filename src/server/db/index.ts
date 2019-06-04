@@ -1,18 +1,27 @@
 import * as mysql from 'mysql';
+let config = require('../../../config');
+let Connection = config.Connection;
+
 
 import Blogs from './blogs';
 
-export const Connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'dbblogsapp',
-    password: 'blahblah',
-    database: 'dbBlogs'
-});
+// export const Connection = mysql.createConnection({
+//         host: 'localhost',
+//         port: 3306,
+//         user: 'dbblogsapp',
+//         password: 'blahblah',
+//         database: 'dbBlogs'
+// });
 
 export const Query = (query: string, values?: Array<string | number>) => {
     return new Promise<Array<any>>((resolve, reject) => {
-        Connection.query(query, values, (err, results) => {
+        Connection.query(query, values, (err: any, results: any) => {
+            // if (err) {
+            //     console.log('conerr:', err);
+            //     reject(err)
+            // } else {
+            //     resolve(results)
+            // }
             if (err) return reject(err);
             return resolve(results);
     })
