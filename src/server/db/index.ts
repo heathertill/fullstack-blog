@@ -3,6 +3,7 @@ let Connection = config.Connection;
 
 
 import Blogs from './blogs';
+import Tags from './tags';
 
 export const Query = (query: string, values?: Array<string | number>) => {
     return new Promise<Array<any>>((resolve, reject) => {
@@ -16,4 +17,5 @@ export const Query = (query: string, values?: Array<string | number>) => {
 
 export default {
     Blogs,
+    Tags
 }

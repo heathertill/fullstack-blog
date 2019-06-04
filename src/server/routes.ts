@@ -43,14 +43,32 @@ router.put('/api/blogs/:id', async (req, res) => {
     }
 });
 
-router.delete('/api/blogs/:id', async(req, res) => {
+router.delete('/api/blogs/:id', async (req, res) => {
     try {
         res.json(await db.Blogs.deleteBlog(req.params.id))
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
     }
-})
+});
+
+router.post('/api/tags', async (req, res) => {
+    try {
+        res.json(await db.Tags.createBlogTag(req.body.blogid, req.body.tagid))
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/api/tags/:blogid', async (req, res) => {
+    try {
+        res.json((await db.Tags.getTag(req.params.blogid)))
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
 
 
 export default router;
