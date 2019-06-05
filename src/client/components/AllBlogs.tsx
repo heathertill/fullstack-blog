@@ -37,7 +37,7 @@ const AllBlogs: React.SFC<AllBlogsProps> = () => {
                 return (
                 <div className="card-deck col-md-4" key={blog.id}>
                     <div className="card m-2 p-1 border-dark rounded">
-                        <img src="images/lucy.jpg" alt="" className="card-img-top" />
+                        <img src="images/lucy.jpg" alt="road" className="card-img-top" />
                         <div className="card-body">
                             <h5 className="card-title">{blog.title}</h5>
                             <p className="card-text">{blog.content}</p>
