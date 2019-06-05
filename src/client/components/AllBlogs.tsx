@@ -23,6 +23,7 @@ const AllBlogs: React.SFC<AllBlogsProps> = () => {
             let r = await fetch('api/blogs');
             let blogs = await r.json();
             blogs.pop();
+            console.log(blogs)
             setBlogs(blogs);
         } catch (err) {
             console.log(err)
@@ -35,16 +36,19 @@ const AllBlogs: React.SFC<AllBlogsProps> = () => {
         <div className="row">
             {blogs.map(blog => {
                 return (
-                <div className="card-deck col-md-4" key={blog.id}>
-                    <div className="card m-2 p-1 border-dark rounded">
-                        <img src="images/lucy.jpg" alt="road" className="card-img-top" />
-                        <div className="card-body">
-                            <h5 className="card-title">{blog.title}</h5>
-                            <p className="card-text">{blog.content}</p>
+                    <div className="card-deck col-md-4" key={blog.id}>
+                        <div className="card m-2 p-1 border-dark rounded">
+                            <div className="card-img-wrapper">
+                                <p className="card-text">{blog.title}</p>
+                                <img src="images/clipboard.jpg" alt="road" className="card-img-top" />
+                            </div>
+                            <div className="card-body">
+                                <p className="card-text">{blog.name}</p>
+                                <p className="card-text">{blog._created}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )
+                )
             })}
 
         </div>

@@ -1,5 +1,22 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 
+$font-title: 'Loved by the King', cursive;
+
 .covalence-blue {
     color: #0091ea;
+}
+
+.card-img-wrapper .card-img-top {
+    z-index: 0;
+}
+
+.card-img-wrapper .card-text {
+    text-align: center;
+    margin-top: 20%;
+    margin-left: 22%;
+    margin-right: 22%;
+    position: absolute;
+    z-index: 1;
+    font-size: 1.8em;
+    font-family: $font-title;
 }
