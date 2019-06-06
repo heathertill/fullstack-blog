@@ -9,7 +9,7 @@ router.get('/api/blogs/:id?', async (req, res) => {
     if (id) {
         try {
             // the [0] gets the blog object from the array
-            res.json((await db.Blogs.one(id))[0]);
+            res.json(((await db.Blogs.one(id))[0])[0]);
         } catch (err) {
             console.log(err);
             res.sendStatus(500);

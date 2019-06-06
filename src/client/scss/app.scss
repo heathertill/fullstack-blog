@@ -1,4 +1,12 @@
+$theme-colors: (
+    "success": rgba(211, 223, 219, 1),
+    "warning": rgba(236, 216, 177, 1),
+    "info": rgba(58, 161, 63, 0.87)
+);
+
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+
+$font-head: 'Sedgwick Ave', cursive;
 
 $font-title: 'Loved by the King', cursive;
 
@@ -19,4 +27,21 @@ $font-title: 'Loved by the King', cursive;
     z-index: 1;
     font-size: 1.8em;
     font-family: $font-title;
+}
+
+body {
+    background: url('https://i2.wp.com/background4free.com/download/white_textile_wallpaper_427466034.jpg?q=100');
+}
+.header {
+    font-size: 5.2em;
+    font-family: $font-head;
+}
+
+.blog-head {
+  color: white
+}
+
+.btn {
+    background-color: white;
+    color: black
 }
