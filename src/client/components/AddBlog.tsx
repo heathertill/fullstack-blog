@@ -10,9 +10,9 @@ const AddBlog: React.SFC<AddBlogProps> = () => {
 
     const [blog, useBlog] = useState<Blog>({});
 
-    const createBlog = async (name: string, title: string, content: string) => {
+    const createBlog = async (title: string, content: string, authorid: string) => {
         try {
-            
+            let data = { title, content, authorid }
         } catch (err) {
             console.log(err)
         }

@@ -14,7 +14,8 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
         name: null,
         title: null,
         content: null,
-        _created: null
+        _created: null,
+        authorid: null
     });
 
     const getBlog = async () => {

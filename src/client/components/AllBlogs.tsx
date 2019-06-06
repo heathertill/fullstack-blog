@@ -9,7 +9,8 @@ export interface Blog {
     name: string,
     title: string,
     content: string,
-    _created: Date
+    _created: Date,
+    authorid: number
 }
 
 const AllBlogs: React.SFC<AllBlogsProps> = () => {
