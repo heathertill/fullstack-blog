@@ -28,6 +28,7 @@ router.post('/api/blogs', async (req, res) => {
     try {
         let newBlog = await db.Blogs.createBlog(req.body.title, req.body.content, req.body.authorid);
         res.json(newBlog);
+        
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
@@ -52,6 +53,15 @@ router.delete('/api/blogs/:id', async (req, res) => {
     }
 });
 
+router.get('/api/tags', async (req, res) => {
+    try {
+        res.json(await db.Tags.getAllTags())
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+})
+
 router.get('/api/tags/:blogid', async (req, res) => {
     try {
         res.json((await db.Tags.getTag(req.params.blogid)))
@@ -72,7 +82,7 @@ router.post('/api/tags', async (req, res) => {
 
 router.get('/api/authors/:name', async (req, res) => {
     try {
-        res.json(await db.Authors.getAuthId(req.params.name))
+        res.json((await db.Authors.getAuthId(req.params.name))[0])
     } catch (err) {
         console.log(err);
         res.sendStatus(500);

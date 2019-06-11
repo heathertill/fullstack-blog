@@ -28,8 +28,8 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
     useEffect(() => { getBlog(); }, [])
 
     return (
-        <div className="row">
-            <div className="c0l-md-4 mx-5">
+        <div className="row justify-content-center">
+            <div className="col-md-10 mx-5">
                 <div className="card border border-dark rounded">
                     <div className="card-body" key={blog.id}>
                         <h5 className="card-title">{blog.title}</h5>

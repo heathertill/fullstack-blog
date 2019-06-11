@@ -1,52 +1,122 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
-import { Blog } from './Allblogs';
 
-export interface AddBlogProps { }
+export interface AddBlogProps extends RouteComponentProps { }
 
-const AddBlog: React.SFC<AddBlogProps> = () => {
+export interface AddBlogState {
+    id: number,
+    name: string,
+    title: string,
+    content: string,
+    authorid: string,
+    tags: { id: number, name: string }[],
+    tagid: string,
+    blogid: number
+}
 
-    const [blog, useBlog] = useState<Blog>({});
+class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
+    constructor(props: AddBlogProps) {
+        super(props);
+        this.state = {
+            id: null,
+            name: '',
+            title: '',
+            content: '',
+            authorid: null,
+            tags: [],
+            tagid: '',
+            blogid: null
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.createBlogTags = this.createBlogTags.bind(this);
+    }
+    async componentWillMount() {
+        let r = await fetch('/api/tags');
+        let tags = await r.json();
+        this.setState({ tags });
+    };
 
-    const createBlog = async (title: string, content: string, authorid: string) => {
-        try {
-            let data = { title, content, authorid }
-        } catch (err) {
-            console.log(err)
-        }
-
+    renderTags() {
+        return this.state.tags.map(tag => {
+            return <option value={tag.id} key={tag.id}>{tag.name}</option>
+        })
     }
 
 
+    async handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+        let name = this.state.name;
+        try {
+            let r = await fetch(`/api/authors/${name}`);
+            let authorid = await r.json();
+            this.setState(authorid[0]);
+        } catch (err) {
+            console.log(err)
+        } finally {
 
+            let data = { title: this.state.title, content: this.state.content, authorid: this.state.authorid }
+            let r = await fetch('api/blogs/', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+            let info = await r.json();
+            this.setState({ blogid: info.insertId })
+            this.createBlogTags();
+            this.props.history.push('/');
+        }
+    };
 
-    // let data = { userid: this.state.userid, text: this.state.text };
-    // let res = await fetch('/api/chirps/', {
-    //     method: 'POST',
-    //     body: JSON.stringify(data),
-    //     headers: {
-    //         "Content-type": "application/json"
-    //     },
-    // });
-    // let info = await res.json();
-    // this.setState({ chirpId: info.insertId })
+    async createBlogTags() {
+        let data = { blogid: this.state.blogid, tagid: this.state.tagid }
+        try {
+            await fetch('/api/tags', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+            console.log('createBlogTags', data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
-    return (
-                <div className="row">
-            <div className="c0l-md-4 mx-5">
-                <div className="card border border-dark rounded">
-                    <div className="card-body" key={blog.id}>
-                        <h5 className="card-title">{blog.title}</h5>
-                        <p className="card-text">{blog.content}</p>
-                        <p className="card-text">{blog._created}</p>
-                        <button onClick={() => history.goBack()} className="btn btn-warning shadow btn-block mx-auto">Go Back</button>
-                    </div>
+   
+
+    render() {
+        return (
+            <div className="chirpInput card col-md-8 border p-3 mt-3">
+                <div className="card-body">
+                    <form className="form-group mb-0 p-3">
+                        <label htmlFor="name">Name</label>
+                        <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ name: e.target.value })}
+                            type="text" name="name" className="form-control" value={this.state.name} />
+                        <label className="mt-3" htmlFor="title">Title</label>
+                        <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ title: e.target.value })}
+                            type="text" name="title" className="form-control" value={this.state.title} />
+                        <label htmlFor="content">Content</label>
+                        <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ content: e.target.value })}
+                            type="text" name="content" className="form-control" value={this.state.content} />
+                        <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => this.setState({ tagid: e.target.value })}
+                            className="form-control" value={this.state.tagid} >
+                            <option>Select Tag</option>
+                            {this.renderTags()}
+                        </select>
+                        <div>
+                            <button onClick={this.handleSubmit}
+                                className="btn btn-primary btn-outline-light"
+                            >Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default AddBlog;
