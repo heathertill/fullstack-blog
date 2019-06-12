@@ -19,6 +19,7 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
         _created: null,
         authorid: null,
     });
+    
 
     const getBlog = async () => {
         let r = await fetch(`/api/blogs/${id}`);
@@ -39,23 +40,21 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
         setTag(tag);
     };
 
-    useEffect(() => { getBlog(); }, [id]);
-
-    useEffect(() => { getTag(); }, [id]);
+    useEffect(() => { getBlog(), getTag() }, [id]);
 
     return (
         <div className="row justify-content-center">
             <div className="col-md-10 mx-5">
                 <div className="card border border-dark rounded">
                     <div className="card-body" key={blog.id}>
-                        <h3 className="card-title">{blog.title}</h3>
+                        <h3 className="card-title mb-0">{blog.title}</h3>
                         <p className="card-text ml-2">by {blog.name}</p>
                         <p className="card-text ml-2">{blog.content}</p>
                         <p className="card-text ml-2">{blog._created}</p>
                         <h4><span className="badge badge-info">{tag.name}</span></h4>
                         <div>
+                            <Link className="btn btn-warning shadow btn-block mx-auto" to={`/${id}/admin`}>Options</Link>
                             <button onClick={() => history.goBack()} className="btn btn-warning shadow btn-block mx-auto">Go Back</button>
-                            <Link to={`/${id}/admin`}>Options</Link>
                         </div>
                     </div>
                 </div>

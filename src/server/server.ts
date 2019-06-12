@@ -9,7 +9,7 @@ console.log(p);
 
 app.use(express.static(p));
 app.use(express.json());
-app.use(apiRouter);
+app.use('/api', apiRouter);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))

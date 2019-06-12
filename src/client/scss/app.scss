@@ -20,13 +20,19 @@ $font-title: 'Loved by the King', cursive;
 
 .card-img-wrapper .card-text {
     text-align: center;
-    margin-top: 20%;
+    margin-top: 10%;
     margin-left: 22%;
     margin-right: 22%;
     position: absolute;
     z-index: 1;
     font-size: 1.8em;
     font-family: $font-title;
+}
+
+.blog-title {
+    width: 50%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 body {
