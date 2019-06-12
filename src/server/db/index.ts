@@ -15,6 +15,10 @@ export const Query = (query: string, values?: Array<string | number>) => {
 })
 };
 
+Connection.connect((err: any) => {
+    if (err) console.log(err);
+})
+
 
 export default {
     Blogs,

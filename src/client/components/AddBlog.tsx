@@ -12,7 +12,8 @@ export interface AddBlogState {
     authorid: string,
     tags: { id: number, name: string }[],
     tagid: string,
-    blogid: number
+    blogid: number,
+    
 }
 
 class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
@@ -51,6 +52,7 @@ class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
             let r = await fetch(`/api/authors/${name}`);
             let authorid = await r.json();
             this.setState(authorid[0]);
+            console.log('authid', authorid[0])
         } catch (err) {
             console.log(err)
         } finally {

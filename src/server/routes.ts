@@ -64,7 +64,7 @@ router.get('/api/tags', async (req, res) => {
 
 router.get('/api/tags/:blogid', async (req, res) => {
     try {
-        res.json((await db.Tags.getTag(req.params.blogid)))
+        res.json((await db.Tags.getTag(req.params.blogid))[0][0])
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
