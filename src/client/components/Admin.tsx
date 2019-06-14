@@ -10,25 +10,12 @@ const Admin: React.SFC<AdminProps> = ({ history, match }) => {
 
     let id = match.params.id
 
-    const [blog, setBlog] = useState<Blog>(Object);
     const [blogTitle, setBlogTitle] = useState('');
     const [blogContent, setBlogContent] = useState('');
-    const [blogTag, setBlogTag] = useState('');
-
-    // const register = e => {
-    //     e.preventDefault();
-
-    // }
-
-    // const handleTitle = (e: any) {
-    //     setBlogTitle(e.target.value)
-    // }
 
     const getBlog = async () => {
         let r = await fetch(`/api/blogs/${id}`);
         let blog = await r.json();
-        console.log('admin', blog)
-        setBlog(blog)
         setBlogTitle(blog.title)
         setBlogContent(blog.content)
     }
@@ -39,7 +26,6 @@ const Admin: React.SFC<AdminProps> = ({ history, match }) => {
         let data = {
             title: blogTitle,
             content: blogContent,
-
         }
         try {
             await fetch(`/api/blogs/${id}`, {
@@ -66,7 +52,6 @@ const Admin: React.SFC<AdminProps> = ({ history, match }) => {
         }
     };
 
-
     const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setBlogTitle(e.target.value);
         console.log('blogtitle', blogTitle)
@@ -81,20 +66,18 @@ const Admin: React.SFC<AdminProps> = ({ history, match }) => {
         <div className="card-deck">
             <div className="card">
                 <div className="card-body">
-                    {/* <form > */}
-                        <h5><input
-                            onChange={handleTitle}
-                            className="form-control" type="text" value={blogTitle} /></h5>
-                        <input onChange={handleContent} type="text" className="form-control" value={blogContent} defaultValue={blog.content} />
-                        <div>
-                            <button
-                                onClick={handleEdit}
-                                className="btn btn-info">Edit</button>
-                            <button
-                                onClick={handleDelete}
-                                className="btn btn-info">Delete</button>
-                        </div>
-                    {/* </form> */}
+                    <h5><input
+                        onChange={handleTitle}
+                        className="form-control" type="text" value={blogTitle} /></h5>
+                    <input onChange={handleContent} type="text" className="form-control" value={blogContent} />
+                    <div>
+                        <button
+                            onClick={handleEdit}
+                            className="btn btn-info">Edit</button>
+                        <button
+                            onClick={handleDelete}
+                            className="btn btn-info">Delete</button>
+                    </div>
                 </div>
             </div>
         </div>

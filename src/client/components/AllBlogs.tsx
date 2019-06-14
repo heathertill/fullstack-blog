@@ -13,6 +13,7 @@ export interface Blog {
     authorid: number
 }
 
+
 const AllBlogs: React.SFC<AllBlogsProps> = () => {
 
     const [blogs, setBlogs] = useState<Blog[]>([]);

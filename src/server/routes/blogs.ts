@@ -3,6 +3,7 @@ import db from '../db';
 
 const router = Router();
 
+
 router.get('/:id?', async (req, res) => {
     let id = req.params.id
     if (id) {
@@ -35,9 +36,8 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-    console.log(req.body)
     try {
-        res.json(await db.Blogs.updateBlog(req.body.title, req.params.id))
+        res.json(await db.Blogs.updateBlog(req.body.title,req.body.content, req.params.id))
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
@@ -52,16 +52,6 @@ router.delete('/:id', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
-
-
-
-
-
-
-
-
-
 
 
 

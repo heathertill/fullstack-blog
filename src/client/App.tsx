@@ -8,6 +8,7 @@ import AllBlogs from './components/AllBlogs';
 import OneBlog from './components/OneBlog';
 import Admin from './components/Admin';
 import AddBlog from './components/AddBlog';
+import About from './components/About';
 
 
 
@@ -23,6 +24,7 @@ const App: React.SFC<AppProps> = props => {
                     <Route exact path='/blogs/:id' component={OneBlog} />
                     <Route exact path='/:id/admin' component={Admin} />
                     <Route exact path='/add' component={AddBlog} />
+                    <Route exact path='/about' component={About} />
                 </Switch>
             </main>
         </BrowserRouter>

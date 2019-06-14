@@ -19,28 +19,47 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
         _created: null,
         authorid: null,
     });
-    
+
 
     const getBlog = async () => {
-        let r = await fetch(`/api/blogs/${id}`);
-        let blog = await r.json();
-        console.log(blog)
-        setBlog(blog);
+        try {
+            let r = await fetch(`/api/blogs/${id}`);
+            let blog = await r.json();
+            setBlog(blog);
+        } catch (err) {
+            console.log(err)
+        }
     };
 
     const [tag, setTag] = useState<Tag>({
         id: null,
-        name: null
+        name: ''
     })
 
     const getTag = async () => {
         let r = await fetch(`/api/tags/${id}`);
         let tag = await r.json();
-        console.log('tagid', tag.name);
         setTag(tag);
     };
 
-    useEffect(() => { getBlog(), getTag() }, [id]);
+    // function handleTag() {
+    //     if (id) {
+    //         const getTag = async () => {
+    //             let r = await fetch(`/api/tags/${id}`);
+    //             let tag = await r.json();
+    //             setTag(tag);
+    //         };
+    //         useEffect(() => { getTag() }, [id]);
+    //         return (
+    //             <span className="badge badge-info">{tag.name}</span>
+    //         )
+    //     } 
+    // }
+
+    useEffect(() => { getBlog() }, [id]);
+    useEffect(() => { getTag() }, [id]);
+
+
 
     return (
         <div className="row justify-content-center">
@@ -52,6 +71,7 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
                         <p className="card-text ml-2">{blog.content}</p>
                         <p className="card-text ml-2">{blog._created}</p>
                         <h4><span className="badge badge-info">{tag.name}</span></h4>
+                        {/* <h4>{handleTag}</h4> */}
                         <div>
                             <Link className="btn btn-warning shadow btn-block mx-auto" to={`/${id}/admin`}>Options</Link>
                             <button onClick={() => history.goBack()} className="btn btn-warning shadow btn-block mx-auto">Go Back</button>

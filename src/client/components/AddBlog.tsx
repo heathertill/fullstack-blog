@@ -13,7 +13,7 @@ export interface AddBlogState {
     tags: { id: number, name: string }[],
     tagid: string,
     blogid: number,
-    
+
 }
 
 class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
@@ -88,33 +88,35 @@ class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
         }
     }
 
-   
+
 
     render() {
         return (
-            <div className="chirpInput card col-md-8 border p-3 mt-3">
-                <div className="card-body">
-                    <form className="form-group mb-0 p-3">
-                        <label htmlFor="name">Name</label>
-                        <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ name: e.target.value })}
-                            type="text" name="name" className="form-control" value={this.state.name} />
-                        <label className="mt-3" htmlFor="title">Title</label>
-                        <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ title: e.target.value })}
-                            type="text" name="title" className="form-control" value={this.state.title} />
-                        <label htmlFor="content">Content</label>
-                        <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ content: e.target.value })}
-                            type="text" name="content" className="form-control" value={this.state.content} />
-                        <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => this.setState({ tagid: e.target.value })}
-                            className="form-control" value={this.state.tagid} >
-                            <option>Select Tag</option>
-                            {this.renderTags()}
-                        </select>
-                        <div>
-                            <button onClick={this.handleSubmit}
-                                className="btn btn-primary btn-outline-light"
-                            >Submit</button>
-                        </div>
-                    </form>
+            <div className="row justify-content-center">
+                <div className="chirpInput card col-md-8 border p-3 mt-3">
+                    <div className="card-body">
+                        <form className="form-group mb-0 p-3">
+                            <label htmlFor="name">Name</label>
+                            <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ name: e.target.value })}
+                                type="text" name="name" className="form-control" value={this.state.name} />
+                            <label className="mt-3" htmlFor="title">Title</label>
+                            <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ title: e.target.value })}
+                                type="text" name="title" className="form-control" value={this.state.title} />
+                            <label htmlFor="content">Content</label>
+                            <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ content: e.target.value })}
+                                type="text" name="content" className="form-control" value={this.state.content} />
+                            <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => this.setState({ tagid: e.target.value })}
+                                className="form-control" value={this.state.tagid} >
+                                <option>Select Tag</option>
+                                {this.renderTags()}
+                            </select>
+                            <div>
+                                <button onClick={this.handleSubmit}
+                                    className="btn btn-primary btn-outline-light"
+                                >Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         );
