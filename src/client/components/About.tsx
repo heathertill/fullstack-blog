@@ -17,7 +17,7 @@ const About: React.SFC<AboutProps> = () => {
                             <p className="card-text">Images created by freepik - www.freepik.com</p>
                         </div>
                         <div>
-                        <Link className="btn btn-warning shadow btn-block mx-auto" to={'/'}>Go Back</Link>
+                        <Link className="btn btn-warning shadow btn-block mx-auto" to={'/'}>Go Home</Link>
                     </div>
                     </div>
                 </div>

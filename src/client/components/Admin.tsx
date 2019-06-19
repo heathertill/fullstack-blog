@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Blog } from './AllBlogs';
-import { Tag } from './OneBlog'
+import { RouteComponentProps } from 'react-router-dom';
 
 export interface AdminProps extends RouteComponentProps<{ id: string }> { }
 
@@ -44,6 +42,9 @@ const Admin: React.SFC<AdminProps> = ({ history, match }) => {
     const handleDelete = async () => {
         try {
             await fetch(`/api/blogs/${id}`, {
+                method: 'DELETE'
+            });
+            await fetch(`/api/tags/${id}`, {
                 method: 'DELETE'
             });
             history.push('/')

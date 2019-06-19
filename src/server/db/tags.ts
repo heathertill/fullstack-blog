@@ -1,6 +1,7 @@
 let config = require('../../../config');
 let Connection = config.Connection;
 import { Query } from './index';
+import { rejects } from 'assert';
 
 
 // const createBlogTag = async (blogid: number, tagid: number) => Query('INSERT INTO blogTags (blogid, tagid) VALUES (?, ?)', [blogid, tagid]);
@@ -40,24 +41,22 @@ export const createBlogTag = async (blogid: number, tagid: number) => {
     })
 }
 
-
-export const getOneTagResults = async (tagid: number) => {
-    let query = 'SELECT * FROM blogs b JOIN blogTags bt ON b.id = bt.blogid WHERE bt.tagid = ?';
+export const deleteBlogTag = async (blogid: number) => {
+    let query = 'DELETE FROM blogTags WHERE blogid = ?';
     return new Promise((resolve, reject) => {
-        Connection.query(query, [tagid], (err: any, results: any) => {
+        Connection.query(query, [blogid], (err: any, results: any) => {
             if (err) {
-            return reject(err)
-        } resolve(results)
+                return reject(err)
+            } resolve (results)
         })
     })
-    
 }
+
 
 
 export default {
     createBlogTag,
     getTag,
     getAllTags,
-    getOneTagResults
-    
+    deleteBlogTag
 }

@@ -32,4 +32,13 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.delete('/:blogid', async (req, res) => {
+    let blogid = req.params.blogid
+    try {
+        res.json(await db.Tags.deleteBlogTag(req.params.blogid))
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 export default router;

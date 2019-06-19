@@ -13,7 +13,6 @@ export interface Blog {
     authorid: number
 }
 
-
 const AllBlogs: React.SFC<AllBlogsProps> = () => {
 
     const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -22,7 +21,6 @@ const AllBlogs: React.SFC<AllBlogsProps> = () => {
         try {
             let r = await fetch('api/blogs');
             let blogs = await r.json();
-            console.log('test', blogs);
             setBlogs(blogs);
         } catch (err) {
             console.log(err)
@@ -39,8 +37,8 @@ const AllBlogs: React.SFC<AllBlogsProps> = () => {
                         <article className="col-md-4 p-2" key={blog.id}>
                             <div className="card m-2 p-1 border-dark rounded">
                                 <div className="card-img-wrapper">
-                                        <p className="card-text  h-50 pt-2 blog-title">{blog.title}</p>
-                                    <img src="images/clipboard.jpg" alt="road" className="card-img-top" />
+                                        <p className="card-text  h-50 pt-2 blog-title-img">{blog.title}</p>
+                                    <img src="images/clipboard.jpg" alt="clipboard" className="card-img-top" />
                                 </div>
                                 <div className="card-body">
                                     <p className="card-text">{blog.name}</p>

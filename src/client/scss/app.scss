@@ -29,7 +29,7 @@ $font-title: 'Loved by the King', cursive;
     font-family: $font-title;
 }
 
-.blog-title {
+.blog-title-img {
     width: 50%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -37,6 +37,7 @@ $font-title: 'Loved by the King', cursive;
 
 body {
     background: url('https://i2.wp.com/background4free.com/download/white_textile_wallpaper_427466034.jpg?q=100');
+   
 }
 .header {
     font-size: 5.2em;
@@ -49,4 +50,18 @@ body {
 
 .aboutdiv {
     font-size: 1.25em
+}
+
+.card-title {
+   font-family: $font-title;
+}
+
+.show-tags {
+    height: 375px;
+}
+
+.blog-content {
+    width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

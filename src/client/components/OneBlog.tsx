@@ -9,7 +9,7 @@ export interface Tag {
     id: number, name: string
 }
 
-const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }) => {
+const OneBlog: React.FC<OneBlogProps> = ({ history, match: { params: { id } } }) => {
 
     const [blog, setBlog] = useState<Blog>({
         id: null,
@@ -42,24 +42,8 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
         setTag(tag);
     };
 
-    // function handleTag() {
-    //     if (id) {
-    //         const getTag = async () => {
-    //             let r = await fetch(`/api/tags/${id}`);
-    //             let tag = await r.json();
-    //             setTag(tag);
-    //         };
-    //         useEffect(() => { getTag() }, [id]);
-    //         return (
-    //             <span className="badge badge-info">{tag.name}</span>
-    //         )
-    //     } 
-    // }
-
     useEffect(() => { getBlog() }, [id]);
     useEffect(() => { getTag() }, [id]);
-
-
 
     return (
         <div className="row justify-content-center">
@@ -71,7 +55,6 @@ const OneBlog: React.SFC<OneBlogProps> = ({ history, match: { params: { id } } }
                         <p className="card-text ml-2">{blog.content}</p>
                         <p className="card-text ml-2">{blog._created}</p>
                         <h4><span className="badge badge-info">{tag.name}</span></h4>
-                        {/* <h4>{handleTag}</h4> */}
                         <div>
                             <Link className="btn btn-warning shadow btn-block mx-auto" to={`/${id}/admin`}>Options</Link>
                             <button onClick={() => history.goBack()} className="btn btn-warning shadow btn-block mx-auto">Go Back</button>

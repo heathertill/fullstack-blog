@@ -44,7 +44,6 @@ class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
         })
     }
 
-
     async handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         let name = this.state.name;
@@ -52,11 +51,9 @@ class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
             let r = await fetch(`/api/authors/${name}`);
             let authorid = await r.json();
             this.setState(authorid[0]);
-            console.log('authid', authorid[0])
         } catch (err) {
             console.log(err)
         } finally {
-
             let data = { title: this.state.title, content: this.state.content, authorid: this.state.authorid }
             let r = await fetch('api/blogs/', {
                 method: 'POST',
@@ -82,31 +79,29 @@ class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
                     "Content-type": "application/json"
                 }
             });
-            console.log('createBlogTags', data)
         } catch (err) {
             console.log(err)
         }
     }
-
-
 
     render() {
         return (
             <div className="row justify-content-center">
                 <div className="chirpInput card col-md-8 border p-3 mt-3">
                     <div className="card-body">
+                    <div>*** Users: Heather, Kenneth, Caroline, Reid or Davis ***</div>
                         <form className="form-group mb-0 p-3">
                             <label htmlFor="name">Name</label>
                             <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ name: e.target.value })}
                                 type="text" name="name" className="form-control" value={this.state.name} />
-                            <label className="mt-3" htmlFor="title">Title</label>
+                            <label className="mt-2" htmlFor="title">Title</label>
                             <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ title: e.target.value })}
                                 type="text" name="title" className="form-control" value={this.state.title} />
-                            <label htmlFor="content">Content</label>
+                            <label className="mt-2" htmlFor="content">Content</label>
                             <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.setState({ content: e.target.value })}
                                 type="text" name="content" className="form-control" value={this.state.content} />
                             <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => this.setState({ tagid: e.target.value })}
-                                className="form-control" value={this.state.tagid} >
+                                className="form-control my-4" value={this.state.tagid} >
                                 <option>Select Tag</option>
                                 {this.renderTags()}
                             </select>
