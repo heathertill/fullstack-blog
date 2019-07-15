@@ -11,6 +11,8 @@ import AddBlog from './components/AddBlog';
 import About from './components/About';
 import ShowTags from './components/ShowTags';
 
+// Only components with a route can receive history, match and location
+
 const App: React.SFC<AppProps> = props => {
     return (
         <BrowserRouter>

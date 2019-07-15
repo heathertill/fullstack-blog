@@ -12,10 +12,14 @@ const Admin: React.SFC<AdminProps> = ({ history, match }) => {
     const [blogContent, setBlogContent] = useState('');
 
     const getBlog = async () => {
-        let r = await fetch(`/api/blogs/${id}`);
-        let blog = await r.json();
-        setBlogTitle(blog.title)
-        setBlogContent(blog.content)
+        try {
+            let r = await fetch(`/api/blogs/${id}`);
+            let blog = await r.json();
+            setBlogTitle(blog.title)
+            setBlogContent(blog.content)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     useEffect(() => { getBlog(); }, []);

@@ -24,7 +24,7 @@ class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
             name: '',
             title: '',
             content: '',
-            authorid: null,
+            authorid: '',
             tags: [],
             tagid: '',
             blogid: null
@@ -51,10 +51,12 @@ class AddBlog extends React.Component<AddBlogProps, AddBlogState> {
             let r = await fetch(`/api/authors/${name}`);
             let authorid = await r.json();
             this.setState(authorid[0]);
+            console.log('comp/addblog/authid', authorid)
         } catch (err) {
             console.log(err)
         } finally {
             let data = { title: this.state.title, content: this.state.content, authorid: this.state.authorid }
+            console.log('comp/addblog/data', data)
             let r = await fetch('api/blogs/', {
                 method: 'POST',
                 body: JSON.stringify(data),

@@ -8,8 +8,9 @@ router.get('/:id?', async (req, res) => {
     let id = req.params.id
     if (id) {
         try {
-            // the [0] gets the blog object from the array
-            res.json(((await db.Blogs.one(id))[0])[0]);
+            // res.json(((await db.Blogs.one(id))[0])[0]);
+            let blog: any = await db.Blogs.one(id);
+            res.json(blog[0][0]);
         } catch (err) {
             console.log(err);
             res.sendStatus(500);

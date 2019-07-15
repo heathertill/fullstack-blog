@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
 router.get('/:blogid', async (req, res) => {
     let blogid = req.params.blogid
     try {
-        // res.json(((await db.Tags.getTag(blogid))[0])[0])
-        res.json((await db.Tags.getTag(blogid))[0][0])
+        let tags: any = await db.Tags.getTag(blogid)
+        res.json(tags[0][0])
     } catch (err) {
         console.log(err);
         res.sendStatus(500);

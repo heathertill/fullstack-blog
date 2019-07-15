@@ -9,8 +9,9 @@ const router = Router();
 
 
 router.get('/:name', async (req, res) => {
+    let name = req.params.name
     try {
-        res.json((await db.Authors.getAuthId(req.params.name))[0])
+        res.json((await db.Authors.getAuthId(name))[0])
     } catch (err) {
         console.log(err);
         res.sendStatus(500);

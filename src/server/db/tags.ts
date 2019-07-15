@@ -1,13 +1,11 @@
 let config = require('../../../config');
 let Connection = config.Connection;
-import { Query } from './index';
-import { rejects } from 'assert';
-
 
 // const createBlogTag = async (blogid: number, tagid: number) => Query('INSERT INTO blogTags (blogid, tagid) VALUES (?, ?)', [blogid, tagid]);
 // const getTag = async (blogid: number) => Query('CALL spGetTagName(?)', [blogid]);
 // const getAllTags = async () => Query('SELECT name, id FROM tags');
 
+// don't need export by each function as they are exported collectively at tbe bottom
 export const getAllTags = async () => {
     let query = 'SELECT name, id FROM tags';
     return new Promise((resolve, reject) => {
